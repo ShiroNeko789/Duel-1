@@ -7,6 +7,8 @@ public class GameTest
 {
     private GameObject gameObj;
     private QuickDrawGame quickDrawGame;
+    private GameObject audioManagerObj;
+    private AudioManager audioManager;
 
     [UnitySetUp]
     public IEnumerator SetUp()
@@ -14,6 +16,7 @@ public class GameTest
         // Create GameObject and attach QuickDrawGame
         gameObj = new GameObject();
         quickDrawGame = gameObj.AddComponent<QuickDrawGame>();
+        gameObj.AddComponent<AudioListener>();
 
         // Set up UI Texts
         quickDrawGame.instructionText = new GameObject().AddComponent<UnityEngine.UI.Text>();
@@ -30,6 +33,20 @@ public class GameTest
         enemyController.enemyAnimator = enemyObj.AddComponent<Animator>();
         enemyController.enemyAnimator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("EnemyAnimatorController");
         quickDrawGame.enemyController = enemyController;
+
+        // Instantiate AudioManager and set up test clips
+        audioManagerObj = new GameObject("AudioManager");
+        audioManager = audioManagerObj.AddComponent<AudioManager>();
+        audioManager.sfxSource = audioManagerObj.AddComponent<AudioSource>();
+        audioManager.sfxClips = new AudioClip[4]; // Adjust array size as needed
+
+        // Add dummy audio clips
+        for (int i = 0; i < audioManager.sfxClips.Length; i++)
+        {
+            audioManager.sfxClips[i] = AudioClip.Create("TestClip" + i, 44100, 1, 44100, false);
+        }
+
+        AudioManager.instance = audioManager; // Set instance for use in tests
 
         // Wait for the Animator to initialize
         yield return null;
@@ -90,6 +107,7 @@ public class GameTest
     public IEnumerator TearDown()
     {
         Object.Destroy(gameObj);
+        Object.Destroy(audioManagerObj);
         yield return null;
     }
 }

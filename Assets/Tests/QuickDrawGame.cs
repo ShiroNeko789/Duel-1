@@ -48,7 +48,7 @@ public class QuickDrawGame : MonoBehaviour
 
     private IEnumerator ShowDrawSignal()
     {
-        yield return new WaitForSeconds(Random.Range(2f, 5f));
+        yield return new WaitForSeconds(Random.Range(1f, 4f));
         instructionText.text = "Duel!";
         drawShown = true;
         reactionTime = Time.time;  // Capture the time when "Draw!" appears
@@ -61,6 +61,7 @@ public class QuickDrawGame : MonoBehaviour
     {
         if (isGameActive && drawShown && Input.GetKeyDown(KeyCode.Space))
         {
+            AudioManager.instance.PlaySFX(1);
             characterAnimator.SetTrigger("Attack");
 
             float playerReactionTime = Time.time - reactionTime;
@@ -79,14 +80,18 @@ public class QuickDrawGame : MonoBehaviour
             UpdateScore();
             Debug.Log("Score incremented to: " + score);
             resultText.text = "Player Win!";
-            enemyController.TriggerDeath(); // Enemy dies if player wins
+            enemyController.TriggerDeath();
+            AudioManager.instance.PlaySFX(0);
+            AudioManager.instance.PlaySFX(3);// Enemy dies if player wins
             StartCoroutine(RestartDuelAfterDelay(6f)); // Wait 6 seconds before restarting when player wins
             return; // Exit to prevent immediate restart
         }
         else
         {
             resultText.text = "Enemy Win!";
-            characterAnimator.SetTrigger("Death"); // Player dies if player loses
+            AudioManager.instance.PlaySFX(0);
+            characterAnimator.SetTrigger("Death");
+            AudioManager.instance.PlaySFX(2);// Player dies if player loses
             StartCoroutine(RestartDuelAfterDelay(6f)); // Wait 5 seconds before restarting when player loses
             return; // Exit to prevent immediate restart
         }
