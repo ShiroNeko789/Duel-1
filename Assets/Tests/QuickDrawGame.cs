@@ -11,11 +11,11 @@ public class QuickDrawGame : MonoBehaviour
 
     public float reactionTime;   // Player's reaction time
     public bool isGameActive;    // True when a duel is active
-    public bool drawShown;       // True when "Draw!" appears
+    private bool drawShown;       // True when "Draw!" appears
     public int score = 0;        // Player's score
     public Animator characterAnimator;
     public Enemy enemyController; // Reference to the EnemyController
-    public bool hasAttempted;    // Flag to check if player has pressed space
+    private bool hasAttempted;    // Flag to check if player has pressed space
 
     void Start()
     {
@@ -33,7 +33,7 @@ public class QuickDrawGame : MonoBehaviour
 
         StartGame();
     }
-        
+
     public void StartGame()
     {
         score = 0;
@@ -59,7 +59,7 @@ public class QuickDrawGame : MonoBehaviour
         enemyController.TriggerAttack();
     }
 
-    public void Update()
+    void Update()
     {
         // Check if the player presses space too early
         if (isGameActive && Input.GetKeyDown(KeyCode.Space) && !drawShown && !hasAttempted)
@@ -72,7 +72,7 @@ public class QuickDrawGame : MonoBehaviour
             AudioManager.instance.PlaySFX(2); // Play the SFX for player loss
 
             // Restart duel after a 3-second delay for early press penalty
-            StartCoroutine(RestartDuelAfterDelay(3f));
+            StartCoroutine(RestartDuelAfterDelay(1f));
         }
         else if (isGameActive && drawShown && Input.GetKeyDown(KeyCode.Space) && !hasAttempted)
         {
@@ -129,22 +129,5 @@ public class QuickDrawGame : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         RestartDuel();
-    }
-
-    public void CheckEarlyPress()
-    {
-        // Simulate the player's early press of space
-        if (isGameActive && !drawShown && !hasAttempted)
-        {
-            hasAttempted = true; // Mark that an attempt was made
-
-            // Trigger player's "death" animation and play the loss sound effect
-            resultText.text = "Rush For What?!";
-            characterAnimator.SetTrigger("Death");
-            AudioManager.instance.PlaySFX(2); // Play the SFX for player loss
-
-            // Restart duel after a 3-second delay for early press penalty
-            StartCoroutine(RestartDuelAfterDelay(3f));
-        }
     }
 }

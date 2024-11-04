@@ -309,7 +309,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 22.470856
+  MinDistance: 65.0131
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -434,7 +434,6 @@ MonoBehaviour:
   scoreText: {fileID: 1937923647}
   reactionTime: 0
   isGameActive: 0
-  drawShown: 1
   score: 0
   characterAnimator: {fileID: 1706991749}
   enemyController: {fileID: 903984322}
@@ -1724,7 +1723,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 56.52307
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -1809,7 +1808,7 @@ Transform:
   m_GameObject: {fileID: 1872429679}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -163.15524, y: 314.6172, z: -6.442397}
+  m_LocalPosition: {x: -4, y: -2, z: -6.442397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2318,8 +2317,8 @@ Transform:
   m_GameObject: {fileID: 2133559170}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0028, y: -0.6623, z: 0}
-  m_LocalScale: {x: 2.5077865, y: 2.3659782, z: 3.1236112}
+  m_LocalPosition: {x: 0.08, y: -0.4776, z: 0}
+  m_LocalScale: {x: 2.706741, y: 2.2887344, z: 3.1236112}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
