@@ -76,6 +76,8 @@ public class QuickDrawGame : MonoBehaviour
         if (playerReactionTime < npcReactionTime)
         {
             score++;
+            UpdateScore();
+            Debug.Log("Score incremented to: " + score);
             resultText.text = "Player Win!";
             enemyController.TriggerDeath(); // Enemy dies if player wins
             StartCoroutine(RestartDuelAfterDelay(6f)); // Wait 6 seconds before restarting when player wins
@@ -84,7 +86,7 @@ public class QuickDrawGame : MonoBehaviour
         else
         {
             resultText.text = "Enemy Win!";
-            characterAnimator.SetTrigger("FDeath"); // Player dies if player loses
+            characterAnimator.SetTrigger("Death"); // Player dies if player loses
             StartCoroutine(RestartDuelAfterDelay(6f)); // Wait 5 seconds before restarting when player loses
             return; // Exit to prevent immediate restart
         }
@@ -99,6 +101,7 @@ public class QuickDrawGame : MonoBehaviour
     {
         drawShown = false;
         instructionText.text = "Get Ready...";
+        resultText.text = "";  // Clear the result text
         StartCoroutine(ShowDrawSignal());
     }
 
