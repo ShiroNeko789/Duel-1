@@ -208,7 +208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 922130512}
         m_TargetAssemblyTypeName: sceneManager, Tests
-        m_MethodName: Instructions
+        m_MethodName: Levels
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1639,6 +1639,7 @@ MonoBehaviour:
   attack: {fileID: 8300000, guid: 59ab9c932024df94e8a824d31cd34acf, type: 3}
   win: {fileID: 8300000, guid: ba0d8c4d3b9401347b90945de90b286e, type: 3}
   lose: {fileID: 8300000, guid: f4dd91cc573c38a44a41ed5d539951aa, type: 3}
+  duel: {fileID: 0}
 --- !u!4 &2030843296
 Transform:
   m_ObjectHideFlags: 0
