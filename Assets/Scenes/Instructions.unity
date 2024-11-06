@@ -499,7 +499,7 @@ RectTransform:
   m_GameObject: {fileID: 736158094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.15, y: 1, z: 1}
+  m_LocalScale: {x: 1.5468885, y: 1.3451204, z: 1.3451204}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 622656646}
@@ -723,7 +723,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 610626891}
-        m_TargetAssemblyTypeName: sceneManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: sceneManager, Tests
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
