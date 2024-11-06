@@ -17,6 +17,13 @@ public class QuickDrawGame : MonoBehaviour
     public Enemy enemyController; // Reference to the EnemyController
     private bool hasAttempted;    // Flag to check if player has pressed space
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     void Start()
     {
         // Check if characterAnimator has a controller, assign one if missing for test purposes
@@ -52,6 +59,7 @@ public class QuickDrawGame : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(1f, 4f));
         instructionText.text = "Duel!";
+        audioManager.PlaySFX(audioManager.duel);
         drawShown = true;
         reactionTime = Time.time;  // Capture the time when "Draw!" appears
 
@@ -69,7 +77,7 @@ public class QuickDrawGame : MonoBehaviour
             // Trigger player's "death" animation and play the loss sound effect
             resultText.text = "Rush For What?!";
             characterAnimator.SetTrigger("Death");
-            AudioManager.instance.PlaySFX(2); // Play the SFX for player loss
+            audioManager.PlaySFX(audioManager.lose);
 
             // Restart duel after a 3-second delay for early press penalty
             StartCoroutine(RestartDuelAfterDelay(1f));
@@ -77,8 +85,8 @@ public class QuickDrawGame : MonoBehaviour
         else if (isGameActive && drawShown && Input.GetKeyDown(KeyCode.Space) && !hasAttempted)
         {
             hasAttempted = true; // Mark that the player has attempted to attack
-            AudioManager.instance.PlaySFX(1);
             characterAnimator.SetTrigger("Attack");
+            audioManager.PlaySFX(audioManager.attack);
 
             float playerReactionTime = Time.time - reactionTime;
             CheckWinOrLose(playerReactionTime);
@@ -97,16 +105,16 @@ public class QuickDrawGame : MonoBehaviour
             Debug.Log("Score incremented to: " + score);
             resultText.text = "Player Win!";
             enemyController.TriggerDeath();
-            AudioManager.instance.PlaySFX(0);
-            AudioManager.instance.PlaySFX(3); // Enemy dies if player wins
+            audioManager.PlaySFX(audioManager.death);
+            audioManager.PlaySFX(audioManager.win);
             StartCoroutine(RestartDuelAfterDelay(3f)); // Wait 6 seconds before restarting when player wins
         }
         else
         {
             resultText.text = "Enemy Win!";
-            AudioManager.instance.PlaySFX(0);
             characterAnimator.SetTrigger("Death");
-            AudioManager.instance.PlaySFX(2); // Player dies if player loses
+            audioManager.PlaySFX(audioManager.death);
+            audioManager.PlaySFX(audioManager.lose);
             StartCoroutine(RestartDuelAfterDelay(3f)); // Wait 6 seconds before restarting when player loses
         }
     }
