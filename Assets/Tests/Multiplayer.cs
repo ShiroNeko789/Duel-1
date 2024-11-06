@@ -51,7 +51,6 @@ public class Multiplayer : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(1f, 4f));
         instructionText.text = "Duel!";
-        audioManager.PlaySFX(audioManager.duel);
         drawShown = true;
     }
 
@@ -65,8 +64,8 @@ public class Multiplayer : MonoBehaviour
         else if (isGameActive && drawShown && Input.GetKeyDown(KeyCode.S) && !player1Attempted)
         {
             player1Attempted = true;
+            audioManager.PlaySFX(audioManager.attack);
             player1Animator.SetTrigger("Attack");
-            audioManager.PlaySFX(audioManager.attack);// Player 1's attack animation
             reactionTimePlayer1 = Time.time;  // Capture Player 1's reaction time
             CheckWinner();
         }
@@ -79,8 +78,8 @@ public class Multiplayer : MonoBehaviour
         else if (isGameActive && drawShown && Input.GetKeyDown(KeyCode.L) && !player2Attempted)
         {
             player2Attempted = true;
-            player2Animator.SetTrigger("FAttack");
-            audioManager.PlaySFX(audioManager.attack);// Player 2's attack animation
+            audioManager.PlaySFX(audioManager.attack);
+            player2Animator.SetTrigger("FAttack");// Player 2's attack animation
             reactionTimePlayer2 = Time.time;  // Capture Player 2's reaction time
             CheckWinner();
         }
@@ -97,9 +96,10 @@ public class Multiplayer : MonoBehaviour
             {
                 scorePlayer1++;
                 player1ScoreText.text = "Score: " + scorePlayer1;
-                resultText.text = "Player 1 Wins!";
                 audioManager.PlaySFX(audioManager.win);
                 audioManager.PlaySFX(audioManager.death);
+                resultText.text = "Player 1 Wins!";
+                
 
                 Debug.Log("Player 2 FDeath Triggered");  // Debug log for Player 2's death
                 player2Animator.SetTrigger("FDeath");  // Player 2's death animation
@@ -108,9 +108,10 @@ public class Multiplayer : MonoBehaviour
             {
                 scorePlayer2++;
                 player2ScoreText.text = "Score: " + scorePlayer2;
-                resultText.text = "Player 2 Wins!";
                 audioManager.PlaySFX(audioManager.lose);
                 audioManager.PlaySFX(audioManager.death);
+                resultText.text = "Player 2 Wins!";
+
                 Debug.Log("Player 1 Death Triggered");  // Debug log for Player 1's death
                 player1Animator.SetTrigger("Death");  // Player 1's death animation
             }

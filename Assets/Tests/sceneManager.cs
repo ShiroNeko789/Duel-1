@@ -25,4 +25,19 @@ public class sceneManager : MonoBehaviour
     {
         Application.Quit();
     }
+    
+    public void Levels()
+    {
+        SceneManager.LoadScene("Levels");
+    }
+
+    public void InstructionsM()
+    {
+        SceneManager.LoadScene("InstructionsM");
+    }
+
+    public void Mutliplayer()
+    {
+        SceneManager.LoadScene("Multiplayer");
+    }
 }

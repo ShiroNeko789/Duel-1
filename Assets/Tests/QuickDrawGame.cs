@@ -59,7 +59,6 @@ public class QuickDrawGame : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(1f, 4f));
         instructionText.text = "Duel!";
-        audioManager.PlaySFX(audioManager.duel);
         drawShown = true;
         reactionTime = Time.time;  // Capture the time when "Draw!" appears
 
